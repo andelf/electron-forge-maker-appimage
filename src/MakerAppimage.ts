@@ -60,13 +60,14 @@ export default class MakerAppImage extends MakerBase<MakerAppImageConfig> {
     // construct the desktop file.
     const desktopMeta: { [parameter: string]: string } = {
       Name: appName,
-      Exec: executableName,
+      Exec: `${executableName} %u`,
       Terminal: "false",
       Type: "Application",
       Icon: executableName,
       StartupWMClass: packageJSON.productName as string,
       "X-AppImage-Version": packageJSON.version,
       Comment: packageJSON.description,
+      "MimeType": "x-scheme-handler/logseq",
       Categories: "Utility"
     };
 

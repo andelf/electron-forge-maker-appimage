@@ -55,13 +55,14 @@ class MakerAppImage extends maker_base_1.default {
             // construct the desktop file.
             const desktopMeta = {
                 Name: appName,
-                Exec: executableName,
+                Exec: `${executableName} %u`,
                 Terminal: "false",
                 Type: "Application",
                 Icon: executableName,
                 StartupWMClass: packageJSON.productName,
                 "X-AppImage-Version": packageJSON.version,
                 Comment: packageJSON.description,
+                "MimeType": "x-scheme-handler/logseq",
                 Categories: "Utility"
             };
             let desktopEntry = `[Desktop Entry]`;
