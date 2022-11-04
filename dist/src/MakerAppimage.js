@@ -52,6 +52,10 @@ class MakerAppImage extends maker_base_1.default {
             }
             const appFileName = `${appName}-${packageJSON.version}.AppImage`;
             const appPath = path_1.default.join(makeDir, appFileName);
+            let mimeType = '';
+            if (config !== undefined && config.mimeType) {
+                mimeType = config.mimeType.join(';');
+            }
             // construct the desktop file.
             const desktopMeta = {
                 Name: appName,
@@ -62,7 +66,7 @@ class MakerAppImage extends maker_base_1.default {
                 StartupWMClass: packageJSON.productName,
                 "X-AppImage-Version": packageJSON.version,
                 Comment: packageJSON.description,
-                "MimeType": "x-scheme-handler/logseq",
+                "MimeType": mimeType,
                 Categories: "Utility"
             };
             let desktopEntry = `[Desktop Entry]`;

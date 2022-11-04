@@ -57,7 +57,11 @@ export default class MakerAppImage extends MakerBase<MakerAppImageConfig> {
 
     const appFileName = `${appName}-${packageJSON.version}.AppImage`;
     const appPath = path.join(makeDir, appFileName);
-    const mimeType = config?.mimeType?.join(';');
+    let mimeType = '';
+
+    if (config !== undefined && config.mimeType) {
+      mimeType = config.mimeType.join(';')
+    }
 
     // construct the desktop file.
     const desktopMeta: { [parameter: string]: string } = {
@@ -69,7 +73,7 @@ export default class MakerAppImage extends MakerBase<MakerAppImageConfig> {
       StartupWMClass: packageJSON.productName as string,
       "X-AppImage-Version": packageJSON.version,
       Comment: packageJSON.description,
-      "MimeType": mimeType ?? "",
+      "MimeType": mimeType,
       Categories: "Utility"
     };
 
